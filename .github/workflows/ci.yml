@@ -19,7 +19,7 @@ jobs:
       - name: Arquivos obrigatórios presentes
         run: |
           set -e
-          for f in README.md LICENSE SECURITY.md docs/01-instalacao.md docs/02-provedores.md docs/03-claude-code.md docs/04-cascata.md docs/05-autostart-e-dicas.md docs/06-seguranca.md docs/07-troubleshooting.md scripts/iniciar-tudo.bat scripts/configurar-claude-env.ps1; do
+          for f in README.md LICENSE SECURITY.md docs/01-instalacao.md docs/02-provedores.md docs/03-claude-code.md docs/04-cascata.md docs/05-autostart-e-dicas.md docs/06-seguranca.md docs/07-plugins-e-memoria.md docs/08-troubleshooting.md scripts/iniciar-tudo.bat scripts/configurar-claude-env.ps1; do
             test -f "$f" || { echo "FALTANDO: $f"; exit 1; }
           done
           echo "Documentação completa."
