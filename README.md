@@ -1,6 +1,9 @@
 # Guia OmniRoute: sua IA grátis, sua regra 🚀
 
 **Claude Code, VS Code e o que mais você quiser — sem pagar plano, sem depender de um provedor só.**
+
+[![CI](https://github.com/vitorsavicki/guia-omniroute/actions/workflows/ci.yml/badge.svg)](https://github.com/vitorsavicki/guia-omniroute/actions/workflows/ci.yml)
+[![Segurança](https://github.com/vitorsavicki/guia-omniroute/actions/workflows/security.yml/badge.svg)](https://github.com/vitorsavicki/guia-omniroute/actions/workflows/security.yml)
 Guia completo, testado na prática, usando o [OmniRoute](https://github.com/diegosouzapw/OmniRoute) como gateway para
 provedores de IA gratuitos — com **cascata anti-cota** (failover automático),
 autostart no Windows e segurança desde o dia um.
