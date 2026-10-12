@@ -1,10 +1,18 @@
 # 1️⃣ Instalação do OmniRoute
 
-## Pré-requisitos
+## 🧰 Pré-requisitos (se ainda não instalou)
 
-- Windows 10/11
-- **Node.js 22.22.2+** (verifique com `node --version`)
-- VS Code (opcional, mas recomendado)
+```powershell
+winget install OpenJS.NodeJS.LTS          # Node.js (precisa 22.22.2+)
+winget install Microsoft.VisualStudioCode # VS Code (recomendado)
+winget install Git.Git                    # Git
+```
+
+**Feche e reabra o PowerShell** e confirme:
+
+```powershell
+node --version    # esperado: v22.22.2 ou maior
+```
 
 ## Instalação padrão
 
@@ -13,8 +21,20 @@ npm install -g omniroute
 omniroute serve --daemon --port 20128 --no-open
 ```
 
+⏳ **Paciência no primeiro start:** o daemon leva ~2 minutos para ficar
+saudável (ele sincroniza catálogos na largada). Normal!
+
 Painel: http://localhost:20128 — no primeiro acesso a senha é `CHANGEME`
 (**troque já!** veja [06-seguranca.md](06-seguranca.md)).
+
+## ✅ Checkpoint
+
+```powershell
+curl.exe -s -o NUL -w "%{http_code}" http://127.0.0.1:20128/api/monitoring/health
+# esperado: 200
+```
+
+Deu `200`? Prossiga. Timeout? Aguarde 1-2 min e tente de novo.
 
 ## 🚨 Cenário real: disco C: quase cheio
 
@@ -39,7 +59,7 @@ npm install -g omniroute
 O Claude Code grava em `~/.claude` e `~/.bun`. Redirecione com **junctions**:
 
 ```powershell
-# Mova as pastas para o drive grande e crie links simbólicos de volta
+# Mova as pastas para o drive grande e crie links de volta
 robocopy "C:\Users\SEU_USUARIO\.claude" "E:\dev\claude-home" /E /MOVE
 cmd /c mklink /J "C:\Users\SEU_USUARIO\.claude" "E:\dev\claude-home"
 
@@ -47,11 +67,15 @@ robocopy "C:\Users\SEU_USUARIO\.bun" "E:\dev\bun" /E /MOVE
 cmd /c mklink /J "C:\Users\SEU_USUARIO\.bun" "E:\dev\bun"
 ```
 
-## Verificação
+## 🎨 O que está acontecendo
 
-```powershell
-curl.exe -s -o NUL -w "%{http_code}" http://127.0.0.1:20128/api/monitoring/health
-# esperado: 200
+```mermaid
+flowchart TB
+    A["npm install -g omniroute"] --> B["pacote OmniRoute<br/>no seu PC"]
+    B --> C["omniroute serve --daemon"]
+    C --> D["gateway no ar:<br/>localhost:20128 🌐"]
+    D --> E["painel web +<br/>API OpenAI-compatível"]
+    style D fill:#7c3aed,color:#fff
 ```
 
 Próximo: [02-provedores.md](02-provedores.md)

@@ -57,4 +57,9 @@ Provedores gratuitos podem **usar suas conversas** (leia os termos de cada um).
 Regra simples: nada de senhas, dados pessoais ou código proprietário sensível
 nos prompts. Para estudo e projetos pessoais: à vontade.
 
-Próximo: [07-troubleshooting.md](07-troubleshooting.md)
+
+## ✅ Checkpoint
+
+Senha do painel trocada + `OMNIROUTE_SERVER_HOST=127.0.0.1` no `.env` + daemon reiniciado.
+
+Próximo: [07-plugins-e-memoria.md](07-plugins-e-memoria.md)

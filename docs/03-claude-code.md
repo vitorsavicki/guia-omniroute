@@ -58,4 +58,9 @@ Em vez das variáveis, `omniroute launch` abre o Claude Code já configurado
 (perfil isolado). Bom para testes rápidos; as variáveis são melhores para o
 uso diário no VS Code.
 
+
+## ✅ Checkpoint
+
+No terminal **novo**: `claude -p "diga oi"` responde em alguns segundos. Se pedir `/login`, o terminal é velho — feche e reabra.
+
 Próximo: [04-cascata.md](04-cascata.md)

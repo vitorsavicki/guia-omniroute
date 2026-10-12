@@ -45,4 +45,9 @@ Caminho longo demais no Windows. Solução: `LongPathsEnabled=1` (ver
 ### 5. O daemon leva ~2 min para ficar saudável depois do boot
 Health check dando timeout logo após iniciar é normal — aguarde e teste de novo.
 
+
+## ✅ Checkpoint
+
+O arquivo .bat está na pasta `shell:startup`. (Teste opcional: reiniciar o PC e ver o health check dar 200 sem você abrir nada.)
+
 Próximo: [06-seguranca.md](06-seguranca.md)

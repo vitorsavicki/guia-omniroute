@@ -40,4 +40,9 @@ Provedor grátis = cota limitada. **Cada modelo tem cota separada** — quando u
 estoura (`429`), outro continua vivo. Por isso o próximo capítulo existe:
 a cascata faz a troca automaticamente.
 
+
+## ✅ Checkpoint
+
+No painel (http://localhost:20128/dashboard/providers), pelo menos **2 provedores** com status ativo/verde. Anote o ID de um modelo de cada um.
+
 Próximo: [03-claude-code.md](03-claude-code.md)
