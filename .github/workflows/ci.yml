@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    name: Integridade da documentação
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Arquivos obrigatórios presentes
+        run: |
+          set -e
+          for f in README.md LICENSE SECURITY.md docs/01-instalacao.md docs/02-provedores.md docs/03-claude-code.md docs/04-cascata.md docs/05-autostart-e-dicas.md docs/06-seguranca.md docs/07-troubleshooting.md scripts/iniciar-tudo.bat scripts/configurar-claude-env.ps1; do
+            test -f "$f" || { echo "FALTANDO: $f"; exit 1; }
+          done
+          echo "Documentação completa."
+
+      - name: Sem segredos óbvios nos docs (placeholders apenas)
+        run: |
+          set -e
+          if grep -rEn "sk-[a-z0-9]{16,}|ghp_[A-Za-z0-9]{20,}|gsk_[A-Za-z0-9]{20,}|AIza[A-Za-z0-9_-]{20,}" README.md docs scripts; then
+            echo "POSSÍVEL SEGREDO ENCONTRADO — use placeholders <...>!"
+            exit 1
+          fi
+          echo "Limpo: só placeholders."

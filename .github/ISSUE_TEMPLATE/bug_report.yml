@@ -1,0 +1,24 @@
+name: 🐛 Algo não funcionou
+description: Erro seguindo o guia
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: capitulo
+    attributes:
+      label: Em qual etapa você estava?
+      placeholder: "Ex.: 03 - Claude Code, teste de fogo"
+    validations:
+      required: true
+  - type: textarea
+    id: erro
+    attributes:
+      label: Mensagem de erro exata
+      description: Cole a saída completa (sem chaves/tokens!)
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostico
+    attributes:
+      label: Resultado do "Diagnóstico rápido" (docs/07)
+      render: shell
