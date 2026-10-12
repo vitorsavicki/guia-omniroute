@@ -18,25 +18,47 @@ e busca (`/mem-search` dentro do Claude).
 
 ### ⚠️ Pegadinha real (aconteceu neste guia!)
 
-O claude-mem **precisa de uma IA para comprimir as memórias**. Se a IA dele
-aponta para um endpoint sem credencial, ele falha **em silêncio** — worker
-no ar, plugin ativo, e **zero memória gravada**.
+O claude-mem **precisa de uma IA para comprimir as memórias** — e de fábrica
+ele espera uma **assinatura Claude paga** (`provider: "claude"` + auth
+`"subscription"`). Sem ela, cada chamada de compressão falha **em silêncio**:
+worker no ar, plugin ativo, e **zero memória gravada** para sempre.
+(O nosso ficou horas assim — `observations: 0` — até investigarmos.)
 
-A correção: apontar a IA de compressão dele para o **seu OmniRoute**
-(`~/.claude-mem/settings.json` → endpoint `http://localhost:20128/v1`,
-chave do gateway, modelo barato como `gemini/gemini-3.1-flash-lite`).
-Compressão de memória grátis também. ✅
+**A correção:** aponte a IA de compressão para o **seu OmniRoute** (grátis!).
+Edite `~/.claude-mem/settings.json`:
 
-### 🧪 Como testamos de verdade
+```json
+{
+  "CLAUDE_MEM_PROVIDER": "openai-compatible",
+  "CLAUDE_MEM_OPENAI_COMPAT_BASE_URL": "http://localhost:20128/v1",
+  "CLAUDE_MEM_OPENAI_COMPAT_API_KEY": "<SUA_CHAVE_OMNIROUTE>",
+  "CLAUDE_MEM_OPENAI_COMPAT_MODEL": "gemini/gemini-3.1-flash-lite"
+}
+```
 
-1. Criamos um projeto com README + CLAUDE.md + código
-2. Sessão 1: "leia este projeto e ache a palavra secreta" → leu sozinho ✅
-3. Sessão 2, com segredo dito só no prompt da sessão 1 → a IA lembrou
-   pela memória injetada ✅
+Reinicie o worker (feche as sessões do Claude; o hook de SessionStart
+reinicia o serviço) e pronto: **compressão de memória grátis**.
+
+**Como verificar se está gravando:** http://localhost:37777 (painel web) ou:
+
+```powershell
+curl.exe -s http://localhost:37777/api/stats
+# observations > 0 = memória viva! 🧠
+```
+
+### 🧪 Como testamos de verdade (o caso BATATA-ROXA-77)
+
+1. **Sessão 1:** `"anote: o código de recuperação deste projeto é
+   BATATA-ROXA-77"` (dito **só no prompt** — em nenhum arquivo)
+2. O observer do claude-mem comprimiu via OmniRoute → virou a *observação #3*
+3. **Sessão 2 (nova):** `"qual o código de recuperação? (não está em nenhum
+   arquivo)"` → resposta: **"BATATA-ROXA-77, conforme a observação #3"** ✅
+
+Ele lembrou. De graça. Com citação da fonte. 🍠
 
 > 💡 Detalhe importante: o Claude Code já injeta o `CLAUDE.md` do projeto
-> **nativamente** em toda sessão. Para provar memória de verdade, o segredo
-> precisa existir **só na conversa**, não em arquivo.
+> **nativamente** em toda sessão — então segredos em arquivo não provam
+> memória. Para testar de verdade, use algo que só existiu na conversa.
 
 ## 🏗️ O ritual do projeto novo
 
