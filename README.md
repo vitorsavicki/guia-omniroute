@@ -1,6 +1,6 @@
-# Claude Code GRÁTIS no Windows (via OmniRoute) 🚀
+# Guia OmniRoute: sua IA grátis, sua regra 🚀
 
-Guia completo e testado na prática para rodar o **Claude Code sem pagar plano**,
+**Claude Code, VS Code e o que mais você quiser — sem pagar plano, sem depender de um provedor só.**
 usando o [OmniRoute](https://github.com/diegosouzapw/OmniRoute) como gateway para
 provedores de IA gratuitos — com **cascata anti-cota** (failover automático),
 autostart no Windows e segurança desde o dia um.
